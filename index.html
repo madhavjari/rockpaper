@@ -3,10 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="script.js"></script> 
+    <title>RPS-Game</title>
 </head>
 <body>
-    
+    <button id ="Rock">Rock</button>
+    <button id = "Paper">Paper</button>
+    <button id = "Scissor">Scissor</button>
+    <script>
+        function getcomputerchoice(){
+            rand = Math.random()
+            console.log(rand);
+            if(rand <= 0.33)  return 'ROCK';
+            else if(rand <=0.66) return 'PAPER';
+            else return 'SCISSOR';      
+        }
+        let humanScore = 0;
+        let compScore = 0;
+        const firstchoice = document.querySelector("#Rock");
+        function choice1(e) {
+            const compchoice = getcomputerchoice();
+            const humanchoice = "ROCK";
+            console.log("Comp", compchoice);
+            console.log("Human",humanchoice);
+            winner = playRound(compchoice,humanchoice);
+            console.log(winner);
+        }
+        firstchoice.addEventListener("click",choice1);
+        const secondchoice = document.querySelector("#Paper");
+        function choice2(e) {
+            const compchoice = getcomputerchoice();
+            const humanchoice = "PAPER";
+            console.log("Comp", compchoice);
+            console.log("Human",humanchoice);
+            winner = playRound(compchoice,humanchoice);
+            console.log(winner);
+        }
+        secondchoice.addEventListener("click",choice2);
+        const thirdchoice = document.querySelector("#Scissor");
+        function choice3(e) {
+            const compchoice = getcomputerchoice();
+            const humanchoice = "SCISSOR";
+            console.log("Comp", compchoice);
+            console.log("Human",humanchoice);
+            winner = playRound(compchoice,humanchoice);
+            console.log(winner);
+        }
+        thirdchoice.addEventListener("click",choice3);    
+        function playRound(compchoice,humanchoice){
+            if(humanchoice == compchoice){
+                console.log('Its a tie');
+            }
+            else if(humanchoice == 'ROCK' && compchoice == 'SCISSOR'){
+                console.log(`You win, ${humanchoice} beats ${compchoice}`);
+                humanScore++;
+            }
+            else if(humanchoice == 'ROCK' && compchoice == 'PAPER'){
+                console.log(`You lost, ${compchoice} beats ${humanchoice}`);
+                compScore++;
+            }
+            else if(humanchoice == 'PAPER' && compchoice == 'ROCK'){
+                console.log(`You win, ${humanchoice} beats ${compchoice}`);
+                humanScore++;
+            }
+            else if(humanchoice == 'PAPER' && compchoice =='SCISSOR'){
+                console.log(`You lost, ${compchoice} beats ${humanchoice}`);
+                compScore++;
+            }
+            else if(humanchoice == 'SCISSOR' && compchoice == 'PAPER'){
+                console.log(`You win, ${humanchoice} beats ${compchoice}`);
+                humanScore++;
+            }
+            else if(humanchoice == 'SCISSOR' && compchoice == 'ROCK'){
+                console.log(`You lost, ${compchoice} beats ${humanchoice}`);
+                compScore++;
+            }
+            else{
+                console.log('Something is wrong');
+            }
+            console.log(`Human: ${humanScore}`);
+            console.log(`Computer: ${compScore}`);
+            const cont = document.querySelector("body");
+            const human = document.createElement("div");
+            human.textContent = `Human: ${humanScore}`;
+            const comp = document.createElement("div");
+            comp.textContent = `Computer: ${compScore}`;
+            cont.appendChild(human);
+            cont.appendChild(comp);
+            if(compScore == 5 || humanScore == 5){
+                if(humanScore >= compScore) alert('You win');
+                else if(humanScore <= compScore) alert('You lost');
+                else alert('Its a tie');
+            }
+        }
+    </script>
 </body>
 </html>
